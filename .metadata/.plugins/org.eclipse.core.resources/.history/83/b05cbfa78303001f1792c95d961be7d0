@@ -1,0 +1,55 @@
+/**
+ * 
+ */
+console.log("boardDetail 연결");
+console.log(bnoval);
+
+// 비동기 통신 restful
+// post : 데이터 객체를 컨트롤러로 보낼떄 (삽입)
+// get : 조회 (생략 가능)
+// put(patch) : 수정
+// delete : 삭제
+
+
+document.getElementById("cmtAddBtn").addEventListener('click',()=>{
+    const cmtText = document.getElementById("cmtText").value;
+    const cmtWriter = document.getElementById("cmtWriter").innerText;
+    if(cmtText == null || cmtText == ''){
+        document.getElementById('cmtText').focus();
+        return false;
+    }else{
+        let cmtData={
+            bno:bnoval,
+            writer: cmtWriter,
+            content: cmtText
+        }
+        console.log(cmtData);
+        postCommentToServer(cmtData).then(result=>{
+            console.log(result);
+            if(result==1){
+                alert("댓글이 등록 되었습니다.");
+                //화면에 뿌리기
+
+            }
+        })
+    }
+})
+
+async function postCommentToServer(cmtData){
+    try {
+        const url = "/comment/post";
+        const config={
+            method : "post",
+            headers :{
+                "content-type":"application/json, charset=utf-8"
+            },
+            body : JSON.stringify(cmtData)
+        };
+
+        const resp = await fetch(url, config);
+        const result = await resp.text(); // isOk
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -1,0 +1,26 @@
+package com.ezen.test.service;
+
+import org.springframework.stereotype.Service;
+
+import com.ezen.test.domain.CommentVO;
+import com.ezen.test.repository.CommentDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class CommentServiceImpl implements CommentService{
+	
+	private final CommentDAO cdao;
+
+	@Override
+	public int post(CommentVO cvo) {
+		log.info("comment insert dao in");
+		cdao.post(cvo);
+		return 0;
+	}
+	
+
+}

@@ -1,0 +1,59 @@
+package com.ezen.test.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.ezen.test.domain.BoardVO;
+import com.ezen.test.domain.PagingVO;
+import com.ezen.test.repository.BoardDAO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
+@Service
+public class BoardServiceImpl implements BoardService {
+	
+
+	private final BoardDAO bdao;
+
+	@Override
+	public int insert(BoardVO bvo) {
+		log.info("board register service check");
+		return bdao.insert(bvo);
+	}
+
+	@Override
+	public List<BoardVO> getList(PagingVO pgvo) {
+		log.info("board list service in!");
+		return bdao.getList(pgvo);
+	}
+
+	@Override
+	public BoardVO getDetail(int bno) {
+		log.info("board detail service in");
+		bdao.updateReadCount(bno);
+		return bdao.getDetail(bno);
+	}
+
+	@Override
+	public void update(BoardVO bvo) {
+		log.info("board update service in");
+		bdao.update(bvo);
+	}
+
+	@Override
+	public void remove(BoardVO bvo) {
+		log.info("board delete service in");
+		bdao.remove(bvo);
+		
+	}
+
+	@Override
+	public int totalCount() {
+		
+		return bdao.totalCount();
+	}
+}

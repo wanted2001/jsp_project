@@ -1,0 +1,11 @@
+package com.ezen.test.repository;
+
+import com.ezen.test.domain.CommentVO;
+
+public interface CommentDAO {
+
+	int post(CommentVO cvo);
+
+	void getlist(int bno);
+
+}

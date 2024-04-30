@@ -1,0 +1,47 @@
+package com.ezen.test.handler;
+
+import com.ezen.test.domain.PagingVO;
+
+public class PagingHandler {
+	
+	// list 화면 하단에 페이지 조작기능을 담당하는 변수 생성
+	// 시작페이지 번호 / 끝페이지 번호 (한페이지에 보이는 페이지네이션)
+	// 마지막 페이지 번호 
+	// 이전, 다음이 생성되는여부
+	// 현재 게시글 수 , 현재 페이지번호, 한페이지 들어갈 게시글 
+	private int startPage;
+	private int endPage;
+	private int finalPage;
+	private boolean prev,next;
+	private int totalCount;
+	private PagingVO pgvo;
+	
+	
+	public PagingHandler(int totalCount, PagingVO pgvo) {
+		// 컨트롤러에서 받아서 작동
+		this.totalCount = totalCount;
+		this.pgvo = pgvo;
+		// pageNo = 1/ 10 => 0.1(올림) =>1*10
+		// 정수 / 정수 = 정수이기 떄문에 형변환 필수
+		this.endPage = (int)Math.ceil(pgvo.getPageNo() / (double)10) *10;
+		this.startPage = endPage-9;
+		
+		//마지막 페이지
+		// 103 => 103 / 10 = 10.3(올림) => 11로 만들어야 함,
+		this.finalPage = (int)Math.ceil(totalCount / (double)pgvo.getQty());
+		
+		if(finalPage < endPage) {
+			this.endPage = finalPage;
+		}
+		
+		this.prev = this.startPage > 1;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,26 @@
+package com.ezen.test.service;
+
+import java.util.List;
+
+import com.ezen.test.domain.BoardDTO;
+import com.ezen.test.domain.BoardVO;
+import com.ezen.test.domain.PagingVO;
+
+public interface BoardService {
+
+	int insert(BoardDTO bto);
+
+	List<BoardVO> getList(PagingVO pgvo);
+
+	BoardDTO getDetail(int bno);
+
+	void update(BoardDTO bto);
+
+	void remove(BoardVO bvo);
+
+	int totalCount(PagingVO pgvo);
+
+	int removeFile(String uuid);
+	// 내가 추가한 부분
+
+}
